@@ -1,4 +1,4 @@
-@extends('layouts.base')
+@extends('layouts.base', ['title' => 'Jeunes'])
 @section('main')
 
 @endsection

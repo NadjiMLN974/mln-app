@@ -1,4 +1,4 @@
-@extends('layouts.base')
+@extends('layouts.base', ['title' => 'Actus'])
 @section('main')
     @if(Route::is('news'))
     <section class="section-page-actus">

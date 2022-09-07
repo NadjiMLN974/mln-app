@@ -55,6 +55,55 @@ section{
     &.section-two{
         background-color: $white-2;
     }
+    &.section-three{ 
+        background-image: url('http://127.0.0.1:3000/images/jobs.jpg');
+        background-position: center;
+        background-size: cover;
+        padding: 0;
+        > div{
+            padding: 70px 0px 100px 10px;
+            background-color: rgba(0, 153, 153, .5);
+            height: 100%;
+            h2{
+                color: $white;
+                font-size: 30px;
+                margin-bottom: 30px;
+                font-weight: 600;
+            }
+            .grid-container{
+                > .grid-x{
+                    > div{
+                        &:first-child{
+                            background-image: url('http://127.0.0.1:3000/images/jobs.jpg');
+                            background-position: center;
+                            background-size: cover;
+                            > div{
+                                padding: 20px;
+                                height: 100%;
+                                background-color: rgba(0, 153, 153, .5);
+                                h3{
+                                    color: $white;
+                                    font-size: 41px;
+                                    margin-bottom: 30px;
+                                    font-weight: 600;
+                                }
+                            }
+                        }
+                        &:last-child{
+                            padding: 20px;
+                            background-color: $white;
+                            padding: 20px;
+                            > div{
+                                padding: 10px;
+                                border-top: 1px solid #eee;
+                                border-bottom: 1px solid #eee;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
     &.section-four{
         background-color: $green-2;
         padding: 20px 0px;

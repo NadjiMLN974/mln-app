@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Models\Post;
 use App\Models\Mission;
 use App\Models\Funder;
+use App\Models\Job;
 
 /*
 |--------------------------------------------------------------------------
@@ -85,10 +86,12 @@ Route::get('/', function () {
     $news = Post::all();
     $missions = Mission::all();
     $funders = Funder::all();
+    $jobs = Job::all();
     return view('pages/home', [
         'news' => $news,
         'missions' => $missions,
         'funders' => $funders,
+        'jobs' => $jobs,
     ]);
 })->name('home');
 
@@ -152,3 +155,19 @@ Route::get('/mon-compte', function () {
 
 //END ACCOUNT
 
+
+Route::get('/credit-et-mentions-legales', function () {
+    return view('pages/legalNotice');
+})->name('legalNotice');
+
+Route::get('/politique-de-confidentialite', function () {
+    return view('pages/privacyPolicy');
+})->name('privacyPolicy');
+
+Route::get('/politique-cookies', function () {
+    return view('pages/cookiePolicy');
+})->name('cookiePolicy');
+
+Route::get('/gestion-des-cookies', function () {
+    return view('pages/cookieManagement');
+})->name('cookieManagement');

@@ -1,4 +1,4 @@
-@extends('layouts.base', ['title' => 'Home'])
+@extends('layouts.base')
 @section('main')
     <section class="section-one">
         <div class="grid-container">
@@ -47,10 +47,28 @@
             </div>
         </div>
     </section>
-    <section class="section-three text-center">
-        <h2>Nos dernières offres d'emploi</h2>
-        <div></div>
-        <a href="">Voir toutes nos offres</a>
+    <section class="section-three">
+        <div>
+            <h2 class="text-center">Nos dernières offres d'emploi</h2>
+            <div class="grid-container">
+                <div class="grid-x medium-up-2">
+                    <div class="cell">
+                        <div class="text-center grid-y align-center">
+                            <h3>Nos dernières offres</h3>
+                        </div>
+                    </div>
+                    <div class="cell">
+                        @foreach ($jobs as $job)
+                        <div class="grid-x small-up-2">
+                            <div class="cell">{{ $job->title }}</div>
+                            <div class="cell">{{ $job->typeContrat }}</div>
+                        </div>
+                        @endforeach
+                    </div>
+                </div>
+            </div>
+            <a href="">Voir toutes nos offres</a>
+        </div>
     </section>
     <section class="section-four">
         <div class="grid-container">

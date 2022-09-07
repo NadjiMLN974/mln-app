@@ -13,10 +13,13 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('funders', function (Blueprint $table) {
+        Schema::create('jobs', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('name')->nullable();
-            $table->string('image');
+            $table->string('title');
+            $table->boolean('description')->nullable();
+            $table->string('typeContrat');
+            $table->boolean('published')->default(false);
+            $table->timestamps();
         });
     }
 
@@ -27,6 +30,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('funders');
+        Schema::dropIfExists('jobs');
     }
 };
