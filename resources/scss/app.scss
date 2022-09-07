@@ -1,0 +1,91 @@
+$blue: #001c38;
+$white: #FFF;
+$green: #009999;
+$green-2: #DEFFC5;
+$green-3: #2FAC66;
+$white-2: #F2FBFF;
+$white-3: #FCFCFC;
+$gray: #54595F;
+
+@import 'header';
+*{
+    font-family: 'Poppins', sans-serif;
+}
+main{
+    min-height: 50vh;
+}
+section{
+    padding: 30px 0;
+    
+    .grid-container > h3{
+        color: $green;
+        font-size: 12px;
+    }
+    .grid-container > h2{
+        color: $gray;
+        font-weight: 600;
+        font-size: 30px;
+    }
+    &.section-one{
+        background-color: $white-3;
+        font-weight: 600;
+        span{
+            color: $gray;
+            font-size: 19px;
+        }
+        .count{
+            color: $green;
+            font-size: 69px;
+        }
+        .cell{
+            &:first-child{
+                h3{           
+                    margin: 20px 0;   
+                    color: $green;
+                    font-size: 19px;
+                }
+                span{
+                    font-size: 14px;
+                    font-weight: normal;
+                    margin-bottom: 1em;
+                }
+            }
+        }
+    }
+    &.section-two{
+        background-color: $white-2;
+    }
+    &.section-four{
+        background-color: $green-2;
+        padding: 20px 0px;
+        img{
+            width: 200px !important;
+        }
+        a{
+            color: $white; 
+            font-size: 15px;
+            font-weight: bold;
+            padding: 12px 24px;
+            background-color: $green-3;
+            border-radius: 50px;
+        }
+    }
+    &.section-five{
+        .cell{
+            > *{
+                margin: 10px;
+            }
+        }
+    }
+    &.section-six{
+        background-color: $white-2;
+    }
+    &.section-page-actus{
+        .cell{
+            margin: 5px;
+        }
+    }
+}
+@import 'footer';
+@import 'swiper';
+@import 'flip';
