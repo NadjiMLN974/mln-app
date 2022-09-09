@@ -1,10 +1,12 @@
 <?php
 
+use App\Http\Controllers\HomeController;
+use App\Http\Controllers\PostController;
+use App\Http\Controllers\ContactController;
+use App\Http\Controllers\AccountController;
+use App\Http\Controllers\FileUploadController;
+use App\Http\Controllers\JobController;
 use Illuminate\Support\Facades\Route;
-use App\Models\Post;
-use App\Models\Mission;
-use App\Models\Funder;
-use App\Models\Job;
 
 /*
 |--------------------------------------------------------------------------
@@ -82,23 +84,11 @@ use App\Models\Job;
 
 // BEGIN HOME
 
-Route::get('/', function () {
-    $news = Post::all();
-    $missions = Mission::all();
-    $funders = Funder::all();
-    $jobs = Job::all();
-    return view('pages/home', [
-        'news' => $news,
-        'missions' => $missions,
-        'funders' => $funders,
-        'jobs' => $jobs,
-    ]);
-})->name('home');
+Route::get('/', [HomeController::class, 'index'])->name('home');
 
 Route::get('/home', function () {
     return redirect('/');
 });
-
 // END HOME
 
 // BEGIN ABOUT
@@ -123,18 +113,9 @@ Route::get('/pros', function () {
 
 // BEGIN POSTS
 
-Route::get('/actualites', function () {
-    $news = Post::paginate(2);
-    return view('pages/news', [
-        'news' => $news,
-    ]);
-})->name('news');
-
-Route::get('actualites/{slug}', function ($slug) {
-    $new = Post::get()->where('slug', $slug);
-    return view('pages/news', [
-        'new' => $new,
-    ]);
+Route::controller(PostController::class)->group(function(){
+    Route::get('/actualites', 'getPaginate')->name('news');
+    Route::get('actualites/{slug}','find');
 });
 
 // END POSTS
@@ -143,17 +124,18 @@ Route::get('/offre-emploi', function () {
     return view('pages/jobs');
 })->name('jobs');
 
-Route::get('/contact', function () {
-    return view('pages/contacts');
-})->name('contacts');
+Route::get('/contacts', [ContactController::class, 'index'])->name('contacts');
 
 // BEGIN ACCOUNT
 
-Route::get('/mon-compte', function () {
-    return view('pages/account');
-})->name('account');
+Route::get('/admin', [AccountController::class, 'index'])->name('account');
+
+Route::get('/admin/actualites/delete/{id}', [PostController::class, 'delete'])->name('accountPostDelete');
+Route::get('/admin/offre-emploi/delete/{id}', [JobController::class, 'delete'])->name('accountJobDelete');
 
 //END ACCOUNT
+
+
 
 
 Route::get('/credit-et-mentions-legales', function () {
@@ -171,3 +153,7 @@ Route::get('/politique-cookies', function () {
 Route::get('/gestion-des-cookies', function () {
     return view('pages/cookieManagement');
 })->name('cookieManagement');
+
+Auth::routes();
+
+

@@ -1,6 +1,10 @@
 <!DOCTYPE html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
     <head>
+
+        <!-- CSRF Token -->
+        <meta name="csrf-token" content="{{ csrf_token() }}">
+
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <title>{{ pageTitle($title ?? null) }}</title>
@@ -15,6 +19,7 @@
         <script src="https://code.jquery.com/jquery-3.6.1.min.js" integrity="sha256-o88AwQnZB+VDvE9tvIXrMQaPlFFSUTR+nldQm1LuPXQ=" crossorigin="anonymous"></script>
         <script src="https://cdn.jsdelivr.net/npm/foundation-sites@6.7.5/dist/js/foundation.min.js" crossorigin="anonymous"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/Swiper/4.3.5/js/swiper.min.js" crossorigin="anonymous"></script>
+        <script src="/js/ajax.js" crossorigin="anonymous"></script>
 
         <!-- CSS AND JS WITH VITE -->
         @vite(['resources/css/app.css', 'resources/js/app.js'])
@@ -52,13 +57,30 @@
                             <li class="align-self-middle"><a href="">L'Europe s'engage</a></li>
                             <li class="align-self-middle"><a href="{{ route('contacts') }}">Contact</a></li>
                             <li class="align-self-middle"><a href=""  class="button">Me pré-inscrire en ligne</a></li>
+                            @guest
+                                @if (Route::has('login'))
+                                    <li class="align-self-middle">
+                                        <a class="nav-link" href="{{ route('login') }}">Connexion</a>
+                                        <ul class="menu vertical">
+                                            @if (Route::has('register'))
+                                            <li><a href="{{ route('register') }}">S'inscrire</a></li>
+                                            @endif
+                                        </ul>
+                                    </li>
+                                @endif
+                                @else
+                                    <li class="align-self-middle">
+                                        <a href="{{ route('account') }}">{{ Auth::user()->name }}</a>
+                                        <ul class="menu vertical" aria-labelledby="navbarDropdown">
+                                            <li><a href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">Déconnexion</a></li>
+                                            <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+                                                @csrf
+                                            </form>
+                                        </ul>
+                                    </li>
+                            @endguest
                         </ul>
                     </div>
-                {{-- <div class="top-bar-right">
-                    <ul class="menu">
-                    <li><a href=""  class="button">Me pré-inscrire en ligne</a></li>
-                    </ul>
-                </div> --}}
                 </div>
             </div>
         </nav>

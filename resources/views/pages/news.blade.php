@@ -15,7 +15,9 @@
                 </div>
                 @endforeach
             </div>
+            @if (true == $paginate)
             <div class="text-center">{{ $news->links() }}</div>
+            @endif
         </div>
     </section>
     @else

@@ -64,10 +64,20 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
-        return User::create([
+        $user = User::create([
             'name' => $data['name'],
             'email' => $data['email'],
             'password' => Hash::make($data['password']),
         ]);
+        if (request()->hasFile('avatar')) {
+            $file = request()->file('avatar');
+            $extension = $file->getClientOriginalExtension();
+            $filename = $user->name . '_' . $user->id . '.' . $extension;
+            $file->move('images/', $filename);
+            $user->avatar = $filename;
+            $user->save();
+        }
+        return $user;
     }
 }
+// $validatedData = request()->validate(['file' => 'required|csv,txt,xlx,xls,pdf|max:2048']);
